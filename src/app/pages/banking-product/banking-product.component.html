@@ -1,0 +1,53 @@
+
+<div class="row ml-1 mb-3">
+  <button type="button" class="btn btn-outline-primary" (click)="mostrarTabla=true"><i class="fas fa-list"></i></button>
+  <button type="button" class="btn btn-outline-primary" (click)="mostrarTabla=false"><i class="fas fa-grip-vertical"></i></button>
+</div>
+
+<div  class="table-responsive-sm" id="table-productos" *ngIf="mostrarTabla">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Tipo Producto</th>
+        <th scope="col">Banco</th>
+        <th scope="col">Max. Deposito</th>
+        <th scope="col">Max. Retiro</th>
+        <th scope="col">Fecha Registro</th>
+        <th scope="col">Acciones</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let bankingProduct of bankingProducts">
+        <td><a class="text-primary">{{bankingProduct.description}}</a></td>
+        <td>{{bankingProduct.productType.description}}</td>
+        <td>{{bankingProduct.bank.description}}</td>
+        <td>{{bankingProduct.numMaxDeposit}}</td>
+        <td>{{bankingProduct.numMaxWithdrawal}}</td>
+        <td>{{bankingProduct.createAt}}</td>
+        <th class="text-primary"><a onclick="document.body.style.cursor = 'not-allowed';"><i class="far fa-edit"></i></a>
+          <a  onclick="document.body.style.cursor = 'not-allowed';"><i class="far fa-trash-alt"></i></a>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-columns" id="card-productos" *ngIf="!mostrarTabla">
+  <div class="card animated fadeIn fast" *ngFor="let bankingProduct of bankingProducts">
+    <!-- <img th:src="@{/imgs/play.svg}" class="card-img-top" alt="play.svg"> -->
+    <img src="http://lorempixel.com/400/200/" class="card-img-top" alt="lorem" />
+    <div class="card-body">
+      <h5 class="card-title">{{bankingProduct.description}}</h5>
+      <h5 class="card-title">Max. depositos: {{bankingProduct.numMaxDeposit}}</h5>
+      <h5 class="card-title">Max. retiros: {{bankingProduct.numMaxWithdrawal}}</h5>
+      <p class="card-text">{{bankingProduct.idProduct}}</p>
+      <p class="card-text">{{bankingProduct.productType.description}}</p>
+      <!--<a th:href="@{/form/} + ${bankingProducts.id}" class="btn btn-block btn-outline-primary">Ver más ...</a>-->
+      <p>
+        <small class="text-muted">{{bankingProduct.createAt}}</small>
+      </p>
+    </div>
+  </div>
+</div>
